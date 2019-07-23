@@ -32,5 +32,7 @@ void ListRemove(List* plist, LTDataType x);
 
 void ListPrint(List* plist);
 
+void ListDistinct(List* plist);
+ListNode* ListMerge(List *plist1, List *plist2);
 
 #endif /*_LIST_H_*/
