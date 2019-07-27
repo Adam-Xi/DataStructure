@@ -6,7 +6,7 @@ int main()
 {
 	BTNode * testTree = BinaryTreeCreate("ABD##E#H##CF##G##");
 
-	
+	/*
 	BinaryTreePrevOrder(testTree);
 	putchar('\n');
 	BinaryTreeInOrder(testTree);
@@ -19,6 +19,12 @@ int main()
 
 	printf("%d\n", BinaryTreeSize(testTree));
 	printf("%d\n", BinaryTreeLeafSize(testTree));
+	*/
+//	BinaryTreePrevOrderNonR(testTree);
+	putchar('\n');
+	BinaryTreeInOrderNonR(testTree);
+	putchar('\n');
+	BinaryTreePostOrderNonR(testTree);
 
 
 	system("pause");

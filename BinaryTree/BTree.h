@@ -17,7 +17,7 @@ typedef struct BinaryTreeNode
 
 // 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树 
 BTNode* BinaryTreeCreate(BTDataType* a);
-void BinaryTreeDestory(BTNode** root);
+void BinaryTreeDestory(BTNode* root);
 
 void BinaryTreePrevOrder(BTNode* root); 
 void BinaryTreeInOrder(BTNode* root); 
@@ -30,6 +30,12 @@ int BinaryTreeSize(BTNode* root);
 int BinaryTreeLeafSize(BTNode* root);
 int BinaryTreeLevelKSize(BTNode* root, int k);
 BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
+
+void BinaryTreePrevOrderNonR(BTNode* root); 
+void BinaryTreeInOrderNonR(BTNode* root); 
+void BinaryTreePostOrderNonR(BTNode* root);
+
+int BinaryTreeComplete(BTNode* root);
 
 
 #endif /*_BTREE_H_*/
