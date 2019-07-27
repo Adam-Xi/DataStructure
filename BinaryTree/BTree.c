@@ -143,11 +143,9 @@ void BinaryTreeInOrderNonR(BTNode* root)
 	Stack st;
 	StackInit(&st, 100);
 
-	while (cur || !StackIsEmpty(&st))  //当cur为空且栈为空时
+	while (cur || !StackIsEmpty(&st))  
 	{
 		for (; cur; cur = cur->_left)
-		//1、把目前的根及所有的左孩子压栈，直到找不到左孩子
-		//2、把目前的右孩子作为根，继续将他的左孩子们压栈
 		{
 			StackPush(&st, cur);
 		}
@@ -155,9 +153,6 @@ void BinaryTreeInOrderNonR(BTNode* root)
 		if (!StackIsEmpty(&st))
 		{
 			cur = StackFront(&st);
-			//左孩子遍历完毕后，第一个没有左孩子的节点就是
-			//如果右孩子为空，此时栈里将会是下一个要访问的
-			//如果有右孩子，那么此时栈
 			putchar(cur->_data);
 			StackPop(&st);
 			cur = cur->_right;
@@ -232,6 +227,44 @@ void BinaryTreePostOrderNonR(BTNode* root)
 	}
 	StackDestory(&st);
 }
+//后序遍历简便算法
+void BinaryTreePostOrderNonR_2(BTNode* root)
+{
+	BTNode * cur = root;
+
+	Stack st;
+	int tag[32] = { 0 }; //左孩子遍历标签
+
+	StackInit(&st, 100);
+
+	while (cur || !StackIsEmpty(&st))
+	{
+		for (; cur; cur = cur->_left) //类似中序，将左孩子入栈，cur为空时，代表上一个节点的右孩子为空，只有这种情况，才可能进入下面的while
+		{
+			StackPush(&st, cur); //push操作会导致size+1
+			tag[st.size] = 0; //由于入栈的是左孩子，所以这里的左孩子遍历标签置0
+		}
+
+		//只要上面的for执行过哪怕一次循环（右孩子不为空），这个while的后半部分条件都不可能满足
+		while (!StackIsEmpty(&st) && tag[st.size] == 1) //左孩子还没遍历完成时，不能进入打印
+		//所以，这里确保了只有左右子树都遍历完成时，才会进入这个while
+		{
+			cur = StackFront(&st);
+			putchar(cur->_data); //打印根
+			StackPop(&st); //pop操作会导致size-1
+			cur = NULL; //为了循环正常跳出
+		}
+
+		if (!StackIsEmpty(&st))
+		{
+			tag[st.size] = 1; //进入这里证明左子树遍历完毕，左子树标签置1
+			cur = StackFront(&st)->_right; //进入右子树继续遍历
+		}
+	}
+	StackDestory(&st);
+}
+
+
 
 
 
